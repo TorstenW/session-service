@@ -34,7 +34,10 @@ public class SessionExpirationServiceImpl implements SessionExpirationService {
 	public void removeExpiredSessions() {
 		long sessionsCount = sessionRepository.count();
 		List<SessionEntity> sessions = sessionRepository.findAll();
-		sessions = sessions.stream().filter(s -> s.getCreatedDate().plusHours(sessionTimeout).isBefore(LocalDateTime.now())).collect(Collectors.toList());
+		sessions = sessions.stream()
+					.filter(s -> s.getCreatedDate().plusHours(sessionTimeout).isBefore(LocalDateTime.now()))
+					.collect(Collectors.toList());
+		
 		sessionRepository.delete(sessions);
 		log.info("Deleted {} sessions from db", sessionsCount - sessionRepository.count());
 	}

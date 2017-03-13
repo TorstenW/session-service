@@ -43,6 +43,7 @@ public class SessionController {
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(IllegalArgumentException.class)
 	public String illegalArgumentException(IllegalArgumentException e) {
+		log.debug("IllegalArgumentException: {}", e.getMessage());
 		return e.getMessage(); 
 	}
 }
